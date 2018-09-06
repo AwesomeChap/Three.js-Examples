@@ -113,7 +113,7 @@
 
         var materialColor = new THREE.MeshBasicMaterial(
             { 
-                map: THREE.ImageUtils.loadTexture("/assets/textures/planets/starry_background.jpg"), 
+                map: THREE.ImageUtils.loadTexture("assets/textures/planets/starry_background.jpg"), 
                 depthTest: false 
             });
         var bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), materialColor);
@@ -147,7 +147,7 @@
 
     function createCloudMaterial() {
         var cloudTexture = THREE.ImageUtils.loadTexture(
-        "/assets/textures/planets/fair_clouds_4k.png");
+        "assets/textures/planets/fair_clouds_4k.png");
         var cloudMaterial = new THREE.MeshPhongMaterial();
         cloudMaterial.map = cloudTexture;
         cloudMaterial.transparent = true;
@@ -158,11 +158,11 @@
     function createEarthMaterial() {
         // 4096 is the maximum width for maps
         var earthTexture = THREE.ImageUtils.loadTexture(
-        "/assets/textures/planets/earthmap4k.jpg");
+        "assets/textures/planets/earthmap4k.jpg");
         var normalMap = THREE.ImageUtils.loadTexture(
-        "/assets/textures/planets/earth_normalmap_flat4k.jpg");   
+        "assets/textures/planets/earth_normalmap_flat4k.jpg");   
         var specularMap = THREE.ImageUtils.loadTexture(
-        "/assets/textures/planets/earthspec4k.jpg");    
+        "assets/textures/planets/earthspec4k.jpg");    
         var earthMaterial = new THREE.MeshPhongMaterial();
         
         earthMaterial.map = earthTexture;
