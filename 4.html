@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Asteroid</title>
+<meta charset="utf-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.js"></script>
+<script src="libs/three-particle-fire.js"></script>
+<script src="libs/TrackballControls.js"></script>
+<style>
+body{margin: 0; background: #000000; overflow: hidden;}
+/* canvas{display: block;} */
+</style>
+</head>
+<body>
+<script>
+//
+// prepare to use
+//
+particleFire.install( { THREE: THREE } );
+
+var width  = window.innerWidth,
+    height = window.innerHeight,
+    clock = new THREE.Clock(),
+    scene,
+    camera,
+    renderer,
+    loader = new THREE.JSONLoader(),
+    textureLoader = new THREE.TextureLoader();
+
+scene  = new THREE.Scene();
+camera = new THREE.PerspectiveCamera( 40, width / height, 0.1, 100 );
+camera.position.z = 5;
+camera.position.x = 2;
+camera.position.y = 1;
+// camera.position.z = 162;
+// camera.lookAt(new THREE.Vector3(10,0,35));
+
+ // add controls
+ cameraControl = new THREE.TrackballControls( camera );
+
+renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setSize( width, height );
+renderer.setClearColor( '#000000' );
+document.body.appendChild( renderer.domElement );
+
+scene.add( new THREE.DirectionalLight( '#ffffff' ) );
+scene.add( new THREE.AmbientLight( '#666666' ) );
+//0.25,2,150
+var geometry = new particleFire.Geometry( 0.28,2,150 );
+var material = new particleFire.Material( { color: '#003fff' } );
+material.setPerspective( camera.fov, height );
+var particleFireMesh = new THREE.Points( geometry, material );
+particleFireMesh.position.set(  0, -0.22, 0 );
+particleFireMesh.rotation.x = -1 * Math.PI;
+scene.add( particleFireMesh );
+
+var boxGeometry = new THREE.BoxGeometry( 0.7, 0.07, 0.7 );
+var boxMaterial = new THREE.MeshPhongMaterial( {
+	color: 0xffffff,
+} );
+
+var box = new THREE.Mesh( boxGeometry, boxMaterial );
+box.position.set( 0, 0, 0 );
+scene.add( box );
+
+var SPEED = 0.01;
+
+function rotateCube() {
+    // box.rotation.x -= SPEED * 2;
+    box.rotation.y -= SPEED;
+    // box.rotation.z -= SPEED * 3;
+}
+
+( function update () {
+
+	var delta = clock.getDelta();
+	var elapsed = clock.getElapsedTime();
+
+	// if ( elapsed > 30 ) { return; }
+
+	requestAnimationFrame( update );
+
+	rotateCube();
+
+	particleFireMesh.material.update( delta );
+
+	// update the camera
+	cameraControl.update();
+
+	camera.lookAt( scene.position );
+	renderer.render( scene, camera );
+
+} )();
+
+
+window.addEventListener( 'resize', function () {
+
+	var width  = window.innerWidth;
+	var height = window.innerHeight;
+
+	camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+	renderer.setSize( width, height );
+
+	// particleFireMesh.material.setPerspective( camera.fov, height );
+
+} );
+
+</script>
+
+</body>
+</html>
