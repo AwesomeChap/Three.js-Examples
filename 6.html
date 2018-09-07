@@ -73,7 +73,7 @@
         render();
 
 
-        loadSound("assets/audio/sample_audio.ogg");
+        loadSound("assets/audio/imperial_march.ogg");
 
     }
 
@@ -107,7 +107,7 @@
     var c = 0;
     function render() {
         c++;
-        if (c % 2 == 0) updateWaves();
+        if (c % 3 == 0) updateWaves();
         // update stats
         stats.update();
         // and render the scene
@@ -145,6 +145,7 @@
         systems.forEach(function(e) {
             e.position.x -= 1.5
         });
+        
         // and remove the oldest particle system
         if (systems.length === 40) {
             var oldPs = systems.shift();
