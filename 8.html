@@ -23,13 +23,13 @@ var camera;
 var control;
 var stats;
 
-var scale = chroma.scale(['#0000ff','#003fff','#006aff']).domain([0,20]);
+var scale = chroma.scale(['#00a1ff','#00bbff','#00e1ff']).domain([0,20]);
 
 var pm = new THREE.ParticleBasicMaterial();
 pm.map = THREE.ImageUtils.loadTexture("assets/textures/particles/ball.png");
 pm.transparent = true;
-pm.opacity = 0.4;
-pm.size=0.9;
+pm.opacity = .2;
+pm.size=2.6;
 pm.vertexColors = true;
 
 var particleWidth = 100;
@@ -94,43 +94,13 @@ function init() {
     render();
 
     setupSound();
-    loadSound("assets/audio/audio.wav");
+    loadSound("assets/audio/audio2.wav");
 
 }
-
-
-
-//function setupCubes(widht, depth) {
-//
-//    var targetGeometry = new THREE.Geometry();
-//
-//
-//    for (var i = 0 ; i < widht ; i ++) {
-//        for (var j = 0 ; j < depth ; j ++) {
-//            var cubeGeometry = new THREE.BoxGeometry(1, 3, 1, 8, 8, 8);
-//
-//            cubeGeometry.applyMatrix(new THREE.Matrix4().makeTranslation( 2*i,  0 , 2*j ) );
-//
-//            THREE.GeometryUtils.merge(targetGeometry,cubeGeometry);
-//        }
-//    }
-//
-//
-//
-//    var ps = new THREE.ParticleSystem(targetGeometry, pm);
-//    ps.sortParticles = true;
-//
-//
-//    scene.add(ps);
-//    systems.push(ps);
-//}
-
 
 function addControlGui(controlObject) {
     var gui = new dat.GUI();
     gui.add(controlObject, 'rotationSpeed', -0.01, 0.01);
-//    gui.add(controlObject, 'opacity', 0.1, 1);
-//        gui.addColor(controlObject, 'color');
 }
 
 function addStatsObject() {
@@ -155,12 +125,6 @@ function render() {
     camera.position.x = camera.position.x * Math.cos(rotSpeed) + camera.position.z * Math.sin(rotSpeed);
     camera.position.z = camera.position.z * Math.cos(rotSpeed) - camera.position.x * Math.sin(rotSpeed);
     camera.lookAt(scene.position);
-
-    // change opacity
-//    scene.getObjectByName('cube').material.opacity = control.opacity;
-
-    // change color
-//    scene.getObjectByName('cube').material.color = new THREE.Color(control.color);
 
     // update stats
     stats.update();
@@ -330,7 +294,7 @@ function setupParticleSystem(widht, depth) {
             // position. First part determines spacing, second is offset
             var v = new THREE.Vector3(spacing*(i)-spacing*(widht/2), 0, spacing*(j)-spacing*(depth/2));
             targetGeometry.vertices.push(v);
-            targetGeometry.colors.push(new THREE.Color(0x0000ff));
+            targetGeometry.colors.push(new THREE.Color(0x00a1ff));
         }
     }
 
