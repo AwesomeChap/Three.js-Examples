@@ -236,15 +236,6 @@ function setupSound() {
         ps.sortParticles=true;
         geom.verticesNeedUpdate = true;
 
-
-        // clear the current state
-        if (scene.getObjectByName('cube')) {
-            var cube = scene.getObjectByName('cube');
-            var cube2 = scene.getObjectByName('cube2');
-            cube.scale.y=average/20;
-            cube2.scale.y=average2/20;
-
-        }
     }
 
     // setup a analyzer
